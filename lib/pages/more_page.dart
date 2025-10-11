@@ -20,6 +20,15 @@ class MorePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("More Page"));
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
+      child: Column(
+        children: [
+          Row(
+            children: [CircleAvatar(radius: 50, backgroundColor: Colors.grey)],
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:omni_codec_player/constants/app_colors.dart';
 import 'package:omni_codec_player/pages/home_page.dart';
 import 'package:omni_codec_player/pages/library_page.dart';
 import 'package:omni_codec_player/pages/more_page.dart';
@@ -33,23 +34,43 @@ class _MainPageState extends State<MainPage> {
   ];
 
   int _currentIndex = 0;
+  bool _isPressed = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: appBlack(1),
       body: _mainPages[_currentIndex]["target"],
       bottomNavigationBar: Container(
         height: 70,
-        color: const Color.fromARGB(255, 20, 20, 20),
+        color: Colors.transparent,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             for (var item in _mainPages)
-              Container(
+              AnimatedContainer(
+                duration: Duration(microseconds: 300),
                 margin: EdgeInsets.symmetric(vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: !(_currentIndex == _mainPages.indexOf(item))
+                      ? []
+                      : [
+                          BoxShadow(
+                            color: Colors.green.withOpacity(0.5),
+                            offset: const Offset(0, 5),
+                            blurRadius: 15,
+                          ),
+                        ],
+                ),
                 child: InkWell(
+                  // onTapDown: (_) => setState(() => _isPressed = true),
+                  // onTapUp: (_) => setState(() => _isPressed = false),
+                  // onTapCancel: () => setState(() => _isPressed = false),
                   onTap: () => setState(() {
                     _currentIndex = _mainPages.indexOf(item);
                   }),
+
                   child: Column(
                     children: [
                       Icon(
@@ -58,7 +79,7 @@ class _MainPageState extends State<MainPage> {
                             : item["defaultIcon"],
                         color: (_currentIndex == _mainPages.indexOf(item))
                             ? const Color.fromARGB(255, 7, 255, 48)
-                            : Colors.grey,
+                            : appGrey(1),
                         size: 32,
                       ),
                       Text(
