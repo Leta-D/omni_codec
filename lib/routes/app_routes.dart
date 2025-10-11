@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:omni_codec_player/pages/audio_page.dart';
 import 'package:omni_codec_player/pages/home_page.dart';
-import 'package:omni_codec_player/pages/library_page.dart';
+import 'package:omni_codec_player/pages/browse_page.dart';
 import 'package:omni_codec_player/pages/main_page.dart';
 import 'package:omni_codec_player/pages/more_page.dart';
 import 'package:omni_codec_player/pages/most_and_favorite_page.dart';
@@ -17,8 +17,8 @@ class AppRoutes {
       case '/home':
         return MaterialPageRoute(builder: (context) => HomePage());
 
-      case '/library':
-        return MaterialPageRoute(builder: (context) => LibraryPage());
+      case '/browse':
+        return MaterialPageRoute(builder: (context) => BrowsePage());
 
       case '/more':
         return MaterialPageRoute(builder: (context) => MorePage());
