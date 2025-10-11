@@ -64,9 +64,6 @@ class _MainPageState extends State<MainPage> {
                         ],
                 ),
                 child: InkWell(
-                  // onTapDown: (_) => setState(() => _isPressed = true),
-                  // onTapUp: (_) => setState(() => _isPressed = false),
-                  // onTapCancel: () => setState(() => _isPressed = false),
                   onTap: () => setState(() {
                     _currentIndex = _mainPages.indexOf(item);
                   }),
