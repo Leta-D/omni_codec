@@ -114,7 +114,7 @@ class HomePage extends StatelessWidget {
                     "Vedios",
                     style: TextStyle(
                       color: appWhite(1),
-                      fontSize: screenSize.width / 120,
+                      fontSize: screenSize.width / 20,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1.7,
                     ),

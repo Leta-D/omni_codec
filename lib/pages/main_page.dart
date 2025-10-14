@@ -75,7 +75,7 @@ class _MainPageState extends State<MainPage> {
                         onTap: () => setState(() {
                           _currentIndex = _mainPages.indexOf(item);
                         }),
-
+                        radius: 20,
                         child: Column(
                           children: [
                             Icon(
