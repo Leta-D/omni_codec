@@ -5,8 +5,12 @@ import 'package:omni_codec_player/pages/widgets/audio_player_widget.dart';
 class BrowsePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.sizeOf(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
+      padding: EdgeInsets.symmetric(
+        horizontal: screenSize.width / 36.0,
+        vertical: screenSize.height / 49,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -15,7 +19,7 @@ class BrowsePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CircleAvatar(
-                radius: 35,
+                radius: screenSize.width / 10.28,
                 backgroundColor: Colors.transparent,
                 child: Image.asset("assets/image/omniCodec_logo.png"),
               ),
@@ -26,9 +30,9 @@ class BrowsePage extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 640,
+            height: screenSize.height / 1.2,
             child: ListView(
-              children: [folderContainerWidget(), audioPlayerWidget()],
+              children: [folderContainerWidget(context), audioPlayerWidget()],
             ),
           ),
         ],
@@ -36,7 +40,8 @@ class BrowsePage extends StatelessWidget {
     );
   }
 
-  Widget folderContainerWidget() {
+  Widget folderContainerWidget(BuildContext context) {
+    Size screenSize = MediaQuery.sizeOf(context);
     return Wrap(
       children: [
         for (int i = 0; i < 5; i++)
@@ -61,8 +66,8 @@ class BrowsePage extends StatelessWidget {
                 ),
               ],
             ),
-            height: 110,
-            width: 150,
+            height: screenSize.height / 6.72,
+            width: screenSize.width / 2.4,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
@@ -71,10 +76,17 @@ class BrowsePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
 
                   children: [
-                    Icon(Icons.folder_open, size: 50, color: appGreen(0.5)),
+                    Icon(
+                      Icons.folder_open,
+                      size: screenSize.width / 7.2,
+                      color: appGreen(0.5),
+                    ),
                     Text(
                       "Downloads",
-                      style: TextStyle(color: appWhite(1), fontSize: 16),
+                      style: TextStyle(
+                        color: appWhite(1),
+                        fontSize: screenSize.width / 22.5,
+                      ),
                     ),
                   ],
                 ),

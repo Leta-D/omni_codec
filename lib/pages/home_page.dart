@@ -4,6 +4,7 @@ import 'package:omni_codec_player/constants/app_colors.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.sizeOf(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
       child: Column(
@@ -14,7 +15,7 @@ class HomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CircleAvatar(
-                radius: 35,
+                radius: screenSize.width / 10,
                 backgroundColor: Colors.transparent,
                 child: Image.asset("assets/image/omniCodec_logo.png"),
               ),
@@ -25,30 +26,39 @@ class HomePage extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 650,
+            height: screenSize.height / 1.142,
             child: ListView(
               children: [
                 Text(
                   "Wellcome back!",
-                  style: TextStyle(fontSize: 18, color: appGreen(1)),
+                  style: TextStyle(
+                    fontSize: screenSize.width / 20,
+                    color: appGreen(1),
+                  ),
                 ),
                 Text(
                   "Your playlist awaits.",
-                  style: TextStyle(fontSize: 16, color: appWhite(0.7)),
+                  style: TextStyle(
+                    fontSize: screenSize.width / 22.5,
+                    color: appWhite(0.7),
+                  ),
                 ),
 
                 Text(
                   "Explore, play, and save favorite tracks",
-                  style: TextStyle(fontSize: 14, color: appGrey(1)),
+                  style: TextStyle(
+                    fontSize: screenSize.width / 25.7,
+                    color: appGrey(1),
+                  ),
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: screenSize.height / 24.67),
                 ListTile(
                   onTap: () {},
                   title: Text(
                     "Favorite",
                     style: TextStyle(
                       color: appWhite(1),
-                      fontSize: 18,
+                      fontSize: screenSize.width / 20,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1.7,
                     ),
@@ -56,23 +66,27 @@ class HomePage extends StatelessWidget {
                   trailing: Icon(
                     Icons.navigate_next,
                     color: appWhite(0.61),
-                    size: 25,
+                    size: screenSize.width / 14.4,
                   ),
                 ),
 
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
-                  child: Container(height: 150, width: 50, color: appGreen(1)),
+                  child: Container(
+                    height: screenSize.height / 4.933,
+                    width: screenSize.width / 7.2,
+                    color: appGreen(1),
+                  ),
                 ),
 
-                SizedBox(height: 30),
+                SizedBox(height: screenSize.height / 24.67),
                 ListTile(
                   onTap: () {},
                   title: Text(
                     "Most Played",
                     style: TextStyle(
                       color: appWhite(1),
-                      fontSize: 18,
+                      fontSize: screenSize.width / 20,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1.7,
                     ),
@@ -80,23 +94,27 @@ class HomePage extends StatelessWidget {
                   trailing: Icon(
                     Icons.navigate_next,
                     color: appWhite(0.61),
-                    size: 25,
+                    size: screenSize.width / 14.4,
                   ),
                 ),
 
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
-                  child: Container(height: 150, width: 50, color: appGreen(1)),
+                  child: Container(
+                    height: screenSize.height / 4.933,
+                    width: screenSize.width / 7.2,
+                    color: appGreen(1),
+                  ),
                 ),
 
-                SizedBox(height: 30),
+                SizedBox(height: screenSize.height / 24.67),
                 ListTile(
                   onTap: () {},
                   title: Text(
                     "Vedios",
                     style: TextStyle(
                       color: appWhite(1),
-                      fontSize: 18,
+                      fontSize: screenSize.width / 120,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1.7,
                     ),
@@ -104,23 +122,27 @@ class HomePage extends StatelessWidget {
                   trailing: Icon(
                     Icons.navigate_next,
                     color: appWhite(0.61),
-                    size: 25,
+                    size: screenSize.width / 14.4,
                   ),
                 ),
 
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
-                  child: Container(height: 150, width: 50, color: appGreen(1)),
+                  child: Container(
+                    height: screenSize.height / 4.933,
+                    width: screenSize.width / 7.2,
+                    color: appGreen(1),
+                  ),
                 ),
 
-                SizedBox(height: 30),
+                SizedBox(height: screenSize.height / 24.67),
                 ListTile(
                   onTap: () {},
                   title: Text(
                     "Audio",
                     style: TextStyle(
                       color: appWhite(1),
-                      fontSize: 18,
+                      fontSize: screenSize.width / 20,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1.7,
                     ),
@@ -128,15 +150,19 @@ class HomePage extends StatelessWidget {
                   trailing: Icon(
                     Icons.navigate_next,
                     color: appWhite(0.61),
-                    size: 25,
+                    size: screenSize.width / 14.4,
                   ),
                 ),
 
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
-                  child: Container(height: 150, width: 50, color: appGreen(1)),
+                  child: Container(
+                    height: screenSize.height / 4.933,
+                    width: screenSize.width / 7.2,
+                    color: appGreen(1),
+                  ),
                 ),
-                SizedBox(height: 80),
+                SizedBox(height: screenSize.height / 9.25),
               ],
             ),
           ),

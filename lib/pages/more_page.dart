@@ -27,33 +27,37 @@ class MorePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.sizeOf(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15),
       child: Column(
         spacing: 15,
         children: [
           Row(
-            spacing: 30,
+            spacing: screenSize.width / 12,
             children: [
               CircleAvatar(
-                radius: 50,
+                radius: screenSize.width / 7.2,
                 backgroundColor: Colors.transparent,
                 child: Image.asset("assets/image/omniCodec_logo.png"),
               ),
 
               Text(
                 "plays any format, endlessly.",
-                style: TextStyle(fontSize: 12, color: appGrey(1)),
+                style: TextStyle(
+                  fontSize: screenSize.width / 30,
+                  color: appGrey(1),
+                ),
               ),
             ],
           ),
           SizedBox(
-            height: 510,
+            height: screenSize.height / 1.44,
             child: ListView(
               children: [
                 for (var item in pages)
                   Padding(
-                    padding: const EdgeInsets.only(top: 15.0),
+                    padding: EdgeInsets.only(top: screenSize.width / 49),
                     child: ListTile(
                       onTap: () => Navigator.pushNamed(context, item["target"]),
                       leading: Icon(item["icon"], color: appGreen(1)),

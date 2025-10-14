@@ -36,6 +36,7 @@ class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.sizeOf(context);
     return Scaffold(
       backgroundColor: appBlack(1),
       body: Stack(
@@ -45,7 +46,7 @@ class _MainPageState extends State<MainPage> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              height: 70,
+              height: screenSize.height / 15,
               // color: const Color.fromARGB(162, 0, 0, 0),
               color: appBlack(0.7),
               child: Row(
@@ -54,17 +55,19 @@ class _MainPageState extends State<MainPage> {
                   for (var item in _mainPages)
                     AnimatedContainer(
                       duration: Duration(microseconds: 300),
-                      margin: EdgeInsets.symmetric(vertical: 4),
+                      margin: EdgeInsets.symmetric(vertical: 3),
                       decoration: BoxDecoration(
                         color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(
+                          screenSize.width / 18,
+                        ),
                         boxShadow: !(_currentIndex == _mainPages.indexOf(item))
                             ? []
                             : [
                                 BoxShadow(
                                   color: Colors.green.withOpacity(0.5),
                                   offset: const Offset(0, 5),
-                                  blurRadius: 15,
+                                  blurRadius: screenSize.width / 24,
                                 ),
                               ],
                       ),
@@ -82,12 +85,12 @@ class _MainPageState extends State<MainPage> {
                               color: (_currentIndex == _mainPages.indexOf(item))
                                   ? appGreen(1)
                                   : appGrey(1),
-                              size: 32,
+                              size: 28,
                             ),
                             Text(
                               item["label"],
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: screenSize.width / 24,
                                 color:
                                     (_currentIndex == _mainPages.indexOf(item))
                                     ? appWhite(1)
