@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:omni_codec_player/constants/app_colors.dart';
+import 'package:omni_codec_player/logic/device_permission/device_permission_cubit.dart';
+import 'package:omni_codec_player/logic/device_permission/device_permission_state.dart';
 import 'package:omni_codec_player/pages/home_page.dart';
 import 'package:omni_codec_player/pages/browse_page.dart';
 import 'package:omni_codec_player/pages/more_page.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -41,7 +45,51 @@ class _MainPageState extends State<MainPage> {
       backgroundColor: appBlack(1),
       body: Stack(
         children: [
-          _mainPages[_currentIndex]["target"],
+          BlocBuilder<DevicePermissionCubit, DevicePermissionState>(
+            builder: (context, state) {
+              if (state is PermissionGranted) {
+                return _mainPages[_currentIndex]["target"];
+              } else if (state is PermissionInitial) {
+                // Request permission
+                context.read<DevicePermissionCubit>().requestMediaPermission();
+                return Center(
+                  child: CircularProgressIndicator(color: appGreen(1)),
+                );
+              } else {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 50,
+                    children: [
+                      Text(
+                        "Permission Permanently Denied\nPlease allow storage permission from settings",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: appWhite(1),
+                          fontSize: screenSize.width / 20,
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          await openAppSettings().then((value) {
+                            if (value) {
+                              setState(() {});
+                            } else {
+                              context
+                                  .read<DevicePermissionCubit>()
+                                  .requestMediaPermission();
+                            }
+                          });
+                        },
+                        child: Text("Open Settings"),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            },
+          ),
 
           Align(
             alignment: Alignment.bottomCenter,

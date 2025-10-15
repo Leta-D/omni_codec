@@ -10,5 +10,3 @@ class PermissionInitial extends DevicePermissionState {}
 class PermissionGranted extends DevicePermissionState {}
 
 class PermissionDenied extends DevicePermissionState {}
-
-class PermissionPermanentlyDenied extends DevicePermissionState {}

@@ -7,40 +7,90 @@ import 'package:omni_codec_player/pages/more_page.dart';
 import 'package:omni_codec_player/pages/most_and_favorite_page.dart';
 import 'package:omni_codec_player/pages/settings_page.dart';
 import 'package:omni_codec_player/pages/video_page.dart';
+import 'package:omni_codec_player/routes/transition_animations/app_transition_animations.dart';
 
 class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (context) => MainPage());
+        return AppTransitionAnimations.createRouteWithAnimation(
+          MainPage(),
+          settings,
+          "fade",
+        );
 
       case '/home':
-        return MaterialPageRoute(builder: (context) => HomePage());
+        final args = settings.arguments as Map<String, dynamic>;
+        final animationType = args['animationType'] as String;
+        return AppTransitionAnimations.createRouteWithAnimation(
+          HomePage(),
+          settings,
+          animationType,
+        );
 
       case '/browse':
-        return MaterialPageRoute(builder: (context) => BrowsePage());
+        final args = settings.arguments as Map<String, dynamic>;
+        final animationType = args['animationType'] as String;
+        return AppTransitionAnimations.createRouteWithAnimation(
+          BrowsePage(),
+          settings,
+          animationType,
+        );
 
       case '/more':
-        return MaterialPageRoute(builder: (context) => MorePage());
+        final args = settings.arguments as Map<String, dynamic>;
+        final animationType = args['animationType'] as String;
+        return AppTransitionAnimations.createRouteWithAnimation(
+          MorePage(),
+          settings,
+          animationType,
+        );
 
       case '/audio':
-        return MaterialPageRoute(builder: (context) => AudioPage());
+        final args = settings.arguments as Map<String, dynamic>;
+        final animationType = args['animationType'] as String;
+        return AppTransitionAnimations.createRouteWithAnimation(
+          AudioPage(),
+          settings,
+          animationType,
+        );
 
       case '/video':
-        return MaterialPageRoute(builder: (context) => VideoPage());
+        final args = settings.arguments as Map<String, dynamic>;
+        final animationType = args['animationType'] as String;
+        return AppTransitionAnimations.createRouteWithAnimation(
+          VideoPage(),
+          settings,
+          animationType,
+        );
 
       case '/mostAndFavorite':
-        return MaterialPageRoute(builder: (context) => MostAndFavoritePage());
+        final args = settings.arguments as Map<String, dynamic>;
+        final isMostPlayed = args['isMostPlayed'] as bool;
+        final animationType = args['animationType'] as String;
+        return AppTransitionAnimations.createRouteWithAnimation(
+          MostAndFavoritePage(isMostPlayed: isMostPlayed),
+          settings,
+          animationType,
+        );
 
       case '/settings':
-        return MaterialPageRoute(builder: (context) => SettingsPage());
+        final args = settings.arguments as Map<String, dynamic>;
+        final animationType = args['animationType'] as String;
+        return AppTransitionAnimations.createRouteWithAnimation(
+          SettingsPage(),
+          settings,
+          animationType,
+        );
 
       default:
-        return MaterialPageRoute(
-          builder: (context) => Scaffold(
+        return AppTransitionAnimations.createRouteWithAnimation(
+          Scaffold(
             appBar: AppBar(),
             body: Center(child: Text("Route Not Found")),
           ),
+          settings,
+          "rotation",
         );
     }
   }

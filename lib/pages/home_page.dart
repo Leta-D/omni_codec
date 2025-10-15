@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:omni_codec_player/constants/app_colors.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -20,7 +21,14 @@ class HomePage extends StatelessWidget {
                 child: Image.asset("assets/image/omniCodec_logo.png"),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  // openAppSettings();
+                  Navigator.pushNamed(
+                    context,
+                    "/settings",
+                    arguments: {"animationType": "scale"},
+                  );
+                },
                 icon: Icon(Icons.settings, color: appWhite(1)),
               ),
             ],
@@ -32,12 +40,12 @@ class HomePage extends StatelessWidget {
                 Text(
                   "Wellcome back!",
                   style: TextStyle(
-                    fontSize: screenSize.width / 20,
+                    fontSize: screenSize.width / 14.3,
                     color: appGreen(1),
                   ),
                 ),
                 Text(
-                  "Your playlist awaits.",
+                  "Your playlist awaits",
                   style: TextStyle(
                     fontSize: screenSize.width / 22.5,
                     color: appWhite(0.7),
@@ -45,7 +53,7 @@ class HomePage extends StatelessWidget {
                 ),
 
                 Text(
-                  "Explore, play, and save favorite tracks",
+                  "Explore, play, and save favorite tracks.",
                   style: TextStyle(
                     fontSize: screenSize.width / 25.7,
                     color: appGrey(1),

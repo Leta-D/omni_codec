@@ -59,7 +59,19 @@ class MorePage extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(top: screenSize.width / 49),
                     child: ListTile(
-                      onTap: () => Navigator.pushNamed(context, item["target"]),
+                      onTap: () => Navigator.pushNamed(
+                        context,
+                        item["target"],
+
+                        arguments: {
+                          "animationType": "slide",
+                          "isMostPlayed": item["label"] == "Most Played"
+                              ? true
+                              : item["label"] == "Favorite"
+                              ? false
+                              : null,
+                        },
+                      ),
                       leading: Icon(item["icon"], color: appGreen(1)),
                       title: Text(
                         item["label"],
