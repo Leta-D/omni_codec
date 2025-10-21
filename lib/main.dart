@@ -6,6 +6,7 @@ import 'package:omni_codec_player/pages/main_page.dart';
 import 'package:omni_codec_player/routes/app_routes.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => DevicePermissionCubit()),
-        BlocProvider(create: (context) => MediaCubit()),
+        BlocProvider(create: (context) => FetchFromDeviceCubit()),
       ],
       child: MaterialApp(
         title: 'Omni Codec',

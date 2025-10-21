@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:photo_manager/photo_manager.dart';
 
 class FetchFileFromDevice {
   //for fetching audio
@@ -17,37 +18,26 @@ class FetchFileFromDevice {
   }
 
   //fetching video
-  static Future<List<FileSystemEntity>> fetchAllVideos() async {
-    final List<FileSystemEntity> videoFiles = [];
+  static Future<List<AssetEntity>> fetchAllVideos() async {
+    // Assume permission already granted
+    final List<AssetPathEntity> videoAlbums =
+        await PhotoManager.getAssetPathList(
+          type: RequestType.video,
+          filterOption: FilterOptionGroup(
+            orders: [OrderOption(type: OrderOptionType.createDate, asc: false)],
+          ),
+        );
 
-    // Start from external storage
-    final dir = Directory('/storage/emulated/0/'); // Android main storage
+    final List<AssetEntity> allVideos = [];
 
-    await for (var entity in dir.list(recursive: true, followLinks: false)) {
-      if (entity is File && _isVideoFile(entity.path)) {
-        videoFiles.add(entity);
-      }
+    for (final album in videoAlbums) {
+      final List<AssetEntity> videos = await album.getAssetListPaged(
+        page: 0,
+        size: 1000,
+      );
+      allVideos.addAll(videos);
     }
 
-    return videoFiles;
-  }
-
-  static bool _isVideoFile(String path) {
-    final extensions = [
-      '.mp4',
-      '.mkv',
-      '.avi',
-      '.mov',
-      '.flv',
-      '.webm',
-      '.wmv',
-      '.3gp',
-      '.ts',
-      '.m4v',
-      '.mpeg',
-      '.mpg',
-      '.ovg',
-    ];
-    return extensions.any((ext) => path.toLowerCase().endsWith(ext));
+    return allVideos;
   }
 }

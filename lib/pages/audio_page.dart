@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:omni_codec_player/constants/app_colors.dart';
+import 'package:omni_codec_player/logic/fetch_from_device/fetch_from_device_cubit.dart';
+import 'package:omni_codec_player/logic/fetch_from_device/fetch_from_device_state.dart';
 
 class AudioPage extends StatelessWidget {
   @override
@@ -42,7 +45,13 @@ class AudioPage extends StatelessWidget {
               ],
             ),
             SizedBox(height: 30),
-            SizedBox(height: 660, child: ListView(children: [])),
+            ElevatedButton(
+              onPressed: () {
+                BlocProvider.of<FetchFromDeviceCubit>(context).fetchAllMedia();
+              },
+              child: Text("reload"),
+            ),
+            SizedBox(height: 30),
           ],
         ),
       ),

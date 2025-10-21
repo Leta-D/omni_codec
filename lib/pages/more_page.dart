@@ -18,6 +18,11 @@ class MorePage extends StatelessWidget {
       "target": "/mostAndFavorite",
     },
     {
+      "label": "Video To Audio Converter",
+      "icon": Icons.published_with_changes,
+      "target": "/settings",
+    },
+    {
       "label": "Network / Stream",
       "icon": Icons.network_wifi_rounded,
       "target": "/settings",

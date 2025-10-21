@@ -1,15 +1,22 @@
 import 'dart:io';
 
 import 'package:on_audio_query/on_audio_query.dart';
+import 'package:photo_manager/photo_manager.dart';
 
-class FetchFromDeviceState {
+abstract class FetchFromDeviceState {}
+
+class FileFetchingInitial extends FetchFromDeviceState {}
+
+class FileFetchingLoading extends FetchFromDeviceState {}
+
+class FileFetchingLoaded extends FetchFromDeviceState {
   final List<SongModel> audios;
-  final List<FileSystemEntity> videos;
-  final bool loading;
+  final List<AssetEntity> videos;
 
-  FetchFromDeviceState({
-    this.audios = const [],
-    this.videos = const [],
-    this.loading = false,
-  });
+  FileFetchingLoaded({this.audios = const [], this.videos = const []});
+}
+
+class FileFetchingError extends FetchFromDeviceState {
+  final String message;
+  FileFetchingError(this.message);
 }
