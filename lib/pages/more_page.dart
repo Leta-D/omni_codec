@@ -20,7 +20,7 @@ class MorePage extends StatelessWidget {
     {
       "label": "Video To Audio Converter",
       "icon": Icons.published_with_changes,
-      "target": "/settings",
+      "target": "/converter",
     },
     {
       "label": "Network / Stream",

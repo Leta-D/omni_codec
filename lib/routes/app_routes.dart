@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:omni_codec_player/pages/audio_page.dart';
+import 'package:omni_codec_player/pages/convert_to_audio_page.dart';
 import 'package:omni_codec_player/pages/home_page.dart';
 import 'package:omni_codec_player/pages/browse_page.dart';
 import 'package:omni_codec_player/pages/main_page.dart';
@@ -70,6 +71,15 @@ class AppRoutes {
         final animationType = args['animationType'] as String;
         return AppTransitionAnimations.createRouteWithAnimation(
           MostAndFavoritePage(isMostPlayed: isMostPlayed),
+          settings,
+          animationType,
+        );
+
+      case '/converter':
+        final args = settings.arguments as Map<String, dynamic>;
+        final animationType = args['animationType'] as String;
+        return AppTransitionAnimations.createRouteWithAnimation(
+          ConvertToAudioPage(),
           settings,
           animationType,
         );
