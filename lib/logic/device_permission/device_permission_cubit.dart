@@ -12,6 +12,7 @@ class DevicePermissionCubit extends Cubit<DevicePermissionState> {
         Permission.videos,
         Permission.audio,
         // Permission.storage, // fallback for older devices
+        Permission.manageExternalStorage,
       ].request();
 
       // Handle logic

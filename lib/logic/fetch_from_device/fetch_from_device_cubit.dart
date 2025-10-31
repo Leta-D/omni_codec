@@ -9,9 +9,6 @@ class FetchFromDeviceCubit extends Cubit<FetchFromDeviceState> {
     try {
       emit(FileFetchingLoading());
 
-      // await Permission.audio.request();
-      // await Permission.videos.request();
-
       final songs = await FetchFileFromDevice.fetchAllAudio();
       final videos = await FetchFileFromDevice.fetchAllVideos();
 
