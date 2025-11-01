@@ -18,4 +18,25 @@ class FetchFoldersCubit extends Cubit<FetchFoldersState> {
       emit(FetchFoldersError(e.toString()));
     }
   }
+
+  Future<void> fetchFolders(String folderPath) async {
+    try {
+      emit(FetchFoldersLoading());
+
+      List<String> folders = await FetchAllFolders.fetchAllFromFolders(
+        folderPath,
+      );
+
+      emit(
+        FetchFoldersLoaded(
+          folders: folders,
+          currentFolder: folderPath.split("/").last == ""
+              ? "Internal"
+              : folderPath.split("/").last,
+        ),
+      );
+    } catch (e) {
+      emit(FetchFoldersError(e.toString()));
+    }
+  }
 }

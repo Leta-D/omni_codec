@@ -14,6 +14,8 @@ class BrowsePage extends StatefulWidget {
 
 class _BrowsePageState extends State<BrowsePage> {
   bool boxStyleList = true;
+  Set<String> folderStack = {};
+  final String homeFolder = "/storage/emulated/0/";
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +73,26 @@ class _BrowsePageState extends State<BrowsePage> {
                 ),
               ],
             ),
+            BlocBuilder<FetchFoldersCubit, FetchFoldersState>(
+              builder: (context, state) => folderStack.isEmpty
+                  ? SizedBox()
+                  : IconButton(
+                      onPressed: () async {
+                        folderStack.remove(folderStack.last);
+
+                        await BlocProvider.of<FetchFoldersCubit>(
+                          context,
+                          listen: false,
+                        ).fetchFolders(
+                          folderStack.isEmpty ? homeFolder : folderStack.last,
+                        );
+                      },
+                      icon: Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        color: appGreen(0.8),
+                      ),
+                    ),
+            ),
             // SizedBox(
             //   height: screenSize.height / 1.2,
             //   child: ListView(
@@ -78,7 +100,7 @@ class _BrowsePageState extends State<BrowsePage> {
             //   ),
             // ),
             folderContainerWidget(context, boxStyleList),
-            audioPlayerWidget(),
+            // audioPlayerWidget(),
           ],
         ),
       ),
@@ -114,7 +136,7 @@ class _BrowsePageState extends State<BrowsePage> {
           );
         } else if (state is FetchFoldersLoaded) {
           return SizedBox(
-            height: 610,
+            height: 680,
             child: boxStyleList
                 ? GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -122,43 +144,52 @@ class _BrowsePageState extends State<BrowsePage> {
                     ),
                     itemCount: state.folders.length,
                     itemBuilder: (context, index) {
-                      return Container(
-                        padding: EdgeInsets.all(8),
-                        margin: EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              blurStyle: BlurStyle.outer,
-                              blurRadius: 2,
-                              spreadRadius: 5,
-                              color: appGrey(1),
-                            ),
-                            BoxShadow(
-                              blurStyle: BlurStyle.outer,
-                              blurRadius: 2,
-                              spreadRadius: 3,
-                              color: appBlackL(1),
-                            ),
-                          ],
-                        ),
-                        // height: screenSize.height / 6.72,
-                        // width: screenSize.width / 2.4,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      return GestureDetector(
+                        onTap: () {
+                          BlocProvider.of<FetchFoldersCubit>(
+                            context,
+                            listen: false,
+                          ).fetchFolders(state.folders[index]);
+                          folderStack.add(state.folders[index]);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          margin: EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                blurStyle: BlurStyle.outer,
+                                blurRadius: 2,
+                                spreadRadius: 5,
+                                color: appGrey(1),
+                              ),
+                              BoxShadow(
+                                blurStyle: BlurStyle.outer,
+                                blurRadius: 2,
+                                spreadRadius: 3,
+                                color: appBlackL(1),
+                              ),
+                            ],
+                          ),
+                          // height: screenSize.height / 6.72,
+                          // width: screenSize.width / 2.4,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
 
-                          children: [
-                            Icon(
-                              Icons.folder_open,
-                              size: screenSize.width / 7.2,
-                              color: appGreen(0.5),
-                            ),
-                            Text(
-                              state.folders[index].split("/").last,
-                              style: TextStyle(color: appWhite(1)),
-                            ),
-                          ],
+                            children: [
+                              Icon(
+                                Icons.folder_open,
+                                size: screenSize.width / 7.2,
+                                color: appGreen(0.5),
+                              ),
+                              Text(
+                                state.folders[index].split("/").last,
+                                style: TextStyle(color: appWhite(1)),
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },
@@ -167,7 +198,14 @@ class _BrowsePageState extends State<BrowsePage> {
                     itemCount: state.folders.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        onTap: () {},
+                        onTap: () {
+                          BlocProvider.of<FetchFoldersCubit>(
+                            context,
+                            listen: false,
+                          ).fetchFolders(state.folders[index]);
+
+                          folderStack.add(state.folders[index]);
+                        },
 
                         contentPadding: EdgeInsets.only(bottom: 10),
                         splashColor: appGreen(0.2),
